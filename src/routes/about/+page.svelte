@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>About | Newlyn Tides</title> 
+</svelte:head>
+
 <div class="m-auto flex h-full w-full max-w-7xl flex-col gap-1 p-4 text-left">
 	<div>
 		This is a small website that i created to predict tide times near me, specifically for Newlyn.

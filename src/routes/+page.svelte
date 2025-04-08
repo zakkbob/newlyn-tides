@@ -266,6 +266,11 @@
 	let peak_height = $derived(tides[launch_date.valueOf()].height);
 </script>
 
+<svelte:head>
+    <title>Newlyn Tides</title> 
+</svelte:head>
+
+
 <div class="m-auto h-full w-full max-w-lg p-4 text-left *:mx-auto">
 	<div
 		class="flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
