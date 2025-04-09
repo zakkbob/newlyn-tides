@@ -259,8 +259,8 @@
 		let time = tides[launch_date.valueOf()].time;
 		let parts = time.split(':');
 		let hours = parts[0];
-		let mins = String(Math.round((parseInt(parts[1]) / 100) * 60));
-		return hours.padStart(2, '0') + ':' + mins.padEnd(2, '0');
+		let mins = String(Math.round((parseInt(parts[1].padEnd(2, "0")) / 100) * 60));
+		return hours.padStart(2, '0') + ':' + mins.padStart(2, '0');
 	});
 
 	let peak_height = $derived(tides[launch_date.valueOf()].height);
