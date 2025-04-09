@@ -4,7 +4,7 @@
 	var mm = String(today.getMonth() + 1).padStart(2, '0');
 	var yyyy = today.getFullYear();
 
-	let launch_date = $state<string>(yyyy + '-' + mm + '-' + dd);
+	let date = $state<string>(yyyy + '-' + mm + '-' + dd);
 
 	let min_date = '2025-03-11';
 	let max_date = '2025-10-28';
@@ -248,7 +248,7 @@
 	};
 
 	let valid_date = $derived.by(() => {
-		let parsed_launch_date = Date.parse(launch_date);
+		let parsed_launch_date = Date.parse(date);
 		if (parsed_launch_date < parsed_min_date || parsed_launch_date > parsed_max_date) {
 			return false;
 		}
@@ -256,14 +256,14 @@
 	});
 
 	let peak_time = $derived.by(() => {
-		let time = tides[launch_date.valueOf()].time;
+		let time = tides[date.valueOf()].time;
 		let parts = time.split(':');
 		let hours = parts[0];
 		let mins = String(Math.round((parseInt(parts[1].padEnd(2, "0")) / 100) * 60));
 		return hours.padStart(2, '0') + ':' + mins.padStart(2, '0');
 	});
 
-	let peak_height = $derived(tides[launch_date.valueOf()].height);
+	let peak_height = $derived(tides[date.valueOf()].height);
 </script>
 
 <svelte:head>
@@ -275,10 +275,10 @@
 	<div
 		class="flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
 	>
-		<label for="date">Launch Date</label>
+		<label for="date">Date</label>
 		<input
 			type="date"
-			bind:value={launch_date}
+			bind:value={date}
 			min={min_date}
 			max={max_date}
 			id="date"
@@ -288,23 +288,23 @@
 
 	{#if !valid_date}
 		<div class="mt-8 text-lg">
-			Sorry, I don't have any predictions for {launch_date}
+			Sorry, I don't have any predictions for {date}
 		</div>
 	{:else}
 		<div class="mt-8 text-lg">
-			My predictions for {launch_date}
+			My predictions for {date}
 		</div>
 
 		<div
 			class="mt-2 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
 		>
-			<div>Peak Tide Time (UTC)</div>
+			<div>Time of low tide (UTC)</div>
 			<div>{peak_time}</div>
 		</div>
 		<div
 			class="mt-4 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
 		>
-			<div>Peak Tide Height (m)</div>
+			<div>Height of low tide (m)</div>
 			<div>{peak_height}</div>
 		</div>
 	{/if}
