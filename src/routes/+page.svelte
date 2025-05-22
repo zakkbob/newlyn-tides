@@ -260,7 +260,7 @@
 	// time is stored as a float in hours, this does the conversion
 	function convert_hours_to_time(hours: number) {
 		let whole_hours = Math.trunc(hours)
-		let mins = Math.round((whole_hours-whole_hours)*60)
+		let mins = Math.round((hours-whole_hours)*60)
 		return whole_hours.toString() + ':' + mins.toString().padStart(2, '0');
 	}
 
