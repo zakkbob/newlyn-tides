@@ -302,27 +302,15 @@
 		<div
 			class="mt-2 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
 		>
-			<div>Time of low tide (UTC)</div>
-			<div>{low_time}</div>
-		</div>
-		<div
-			class="mt-4 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
-		>
-			<div>Height of low tide (m)</div>
-			<div>{low_tide_height}</div>
+			<div>Low tide</div>
+			<div>{low_tide_height}m at {low_time} UTC</div>
 		</div>
 
 		<div
 			class="mt-4 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
 		>
-			<div>Time of high tide (UTC)</div>
-			<div>{high_time}</div>
-		</div>
-		<div
-			class="mt-4 flex w-full flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-2"
-		>
-			<div>Height of high tide (m)</div>
-			<div>{high_tide_height}</div>
+			<div>High tide</div>
+			<div>{high_tide_height}m at {high_time} UTC</div>
 		</div>
 	{/if}
 </div>
