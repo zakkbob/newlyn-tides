@@ -12,6 +12,7 @@
 	let parsed_min_date = Date.parse(min_date);
 	let parsed_max_date = Date.parse(max_date);
 
+	// hard-coded data :D
 	let tides: { [id: string]: { low_tide_time: string; low_tide_height: string; high_tide_height: string } } =
 		{
 			'2025-03-11': { low_tide_time: '9.8', low_tide_height: '1.5', high_tide_height: '4.7' },
@@ -256,18 +257,21 @@
 		return true;
 	});
 
+	// time is stored as a float in hours, this does the conversion
+	function convert_hours_to_time(hours: number) {
+		let whole_hours = Math.trunc(hours)
+		let mins = Math.round((whole_hours-whole_hours)*60)
+		return whole_hours.toString() + ':' + mins.toString().padStart(2, '0');
+	}
+
 	let low_time = $derived.by(() => {
-		let time = parseFloat(tides[date.valueOf()].low_tide_time);
-		let hours = Math.trunc(time)
-		let mins = Math.round((time-hours)*60)
-		return hours.toString() + ':' + mins.toString().padStart(2, '0');
+		let hours = parseFloat(tides[date.valueOf()].low_tide_time);
+		return convert_hours_to_time(hours);
 	});
 
 	let high_time = $derived.by(() => {
-		let time = parseFloat(tides[date.valueOf()].low_tide_time) + 6.5;
-		let hours = Math.trunc(time)
-		let mins = Math.round((time-hours)*60)
-		return hours.toString() + ':' + mins.toString().padStart(2, '0');
+		let hours = parseFloat(tides[date.valueOf()].low_tide_time) + 6.2; // hacky fix, adds 6hrs and 12 mins to the low tide time
+		return convert_hours_to_time(hours);
 	});
 
 	let low_tide_height = $derived(tides[date.valueOf()].low_tide_height);
